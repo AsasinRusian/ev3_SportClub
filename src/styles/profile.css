@@ -1,0 +1,201 @@
+/* =====================================================================
+   profile.css — Módulo "Mi Perfil": datos, edición y cambio de contraseña.
+   ===================================================================== */
+
+/* Cabecera con botón de acción a la derecha */
+.profile-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-edit {
+  background: #2b7de9;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.55rem 1.1rem;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-edit:hover { background: #1f63bd; }
+
+.btn-save {
+  background: #2e9e5b;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.62rem 1.2rem;
+  border-radius: 9px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background 0.15s ease;
+}
+.btn-save:hover:not(:disabled) { background: #25814a; }
+.btn-save:disabled { opacity: 0.7; cursor: default; }
+
+.btn-cancel {
+  background: #fff;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-weight: 600;
+  padding: 0.62rem 1.2rem;
+  border-radius: 9px;
+  cursor: pointer;
+}
+.btn-cancel:hover { background: #f3f4f7; }
+
+/* Disposición de dos columnas */
+.profile-layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1.35fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+@media (max-width: 880px) {
+  .profile-layout { grid-template-columns: 1fr; }
+}
+
+/* ----- Tarjeta resumen (izquierda) ----- */
+.pcard {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+}
+
+.summary-card { text-align: center; }
+.summary-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  margin: 0 auto 0.9rem;
+  background: linear-gradient(135deg, var(--role-primary), var(--role-primary-dark));
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2.4rem;
+}
+.summary-name { font-size: 1.3rem; font-weight: 700; margin: 0 0 0.4rem; }
+
+.summary-divider { height: 1px; background: var(--line); margin: 1.2rem 0; }
+
+.summary-list { display: grid; gap: 1rem; text-align: left; }
+.summary-item { display: flex; align-items: flex-start; gap: 0.7rem; }
+.summary-item .si-icon {
+  width: 34px; height: 34px; border-radius: 9px;
+  background: var(--role-soft); color: var(--role-primary-dark);
+  display: grid; place-items: center; flex-shrink: 0; font-size: 1rem;
+}
+.summary-item .si-label { font-size: 0.74rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700; }
+.summary-item .si-value { font-weight: 600; word-break: break-word; }
+
+/* ----- Insignia de rol ----- */
+.role-badge {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.22rem 0.65rem;
+  border-radius: 999px;
+}
+.role-badge.role-user  { background: #e7f0fb; color: #16447f; }
+.role-badge.role-coach { background: #e3f4ea; color: #0e5e34; }
+.role-badge.role-admin { background: #efe7fb; color: #46217a; }
+
+/* ----- Secciones de formulario (derecha) ----- */
+.section-card { margin-bottom: 1.25rem; }
+.section-card .sc-head { margin-bottom: 1.1rem; }
+.section-card .sc-head h3 { margin: 0 0 0.2rem; font-size: 1.15rem; font-weight: 700; }
+.section-card .sc-head p { margin: 0; color: var(--muted); font-size: 0.88rem; }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.2rem;
+}
+.form-grid .full { grid-column: 1 / -1; }
+@media (max-width: 560px) { .form-grid { grid-template-columns: 1fr; } }
+
+.pfield { display: flex; flex-direction: column; }
+.pfield label {
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+.pfield label .req { color: var(--danger); margin-left: 2px; }
+
+.pfield input,
+.pfield textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.93rem;
+  color: var(--ink);
+  background: #fff;
+  font-family: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.pfield textarea { resize: vertical; min-height: 80px; }
+
+.pfield input:focus,
+.pfield textarea:focus {
+  outline: none;
+  border-color: var(--role-primary);
+  box-shadow: 0 0 0 3px var(--role-soft);
+}
+
+.pfield input:disabled {
+  background: #f3f4f7;
+  color: #8a8f9c;
+  cursor: not-allowed;
+}
+
+.pfield.invalid input,
+.pfield.invalid textarea { border-color: var(--danger); }
+.pfield .err { color: var(--danger); font-size: 0.8rem; margin-top: 0.3rem; }
+.pfield .hint { color: var(--muted); font-size: 0.76rem; margin-top: 0.3rem; }
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+/* Nota informativa */
+.info-note {
+  background: #eaf2fd;
+  border: 1px solid #cfe1f8;
+  color: #1f5fa6;
+  border-radius: 9px;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.84rem;
+  margin-top: 1rem;
+}
+
+.btn-pass {
+  background: #2b7de9;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.62rem 1.2rem;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-pass:hover:not(:disabled) { background: #1f63bd; }
+.btn-pass:disabled { opacity: 0.7; cursor: default; }
