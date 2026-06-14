@@ -1,0 +1,67 @@
+/* =====================================================================
+   variables.css — Tokens de diseño del sistema SportClub
+   Identidad de marca: morado/violeta + dorado (basado en el logo).
+   Cada rol tiene su propio color: usuario=azul, coach=verde, admin=morado.
+   ===================================================================== */
+
+:root {
+  /* Marca SportClub */
+  --brand-900: #2a1245;
+  --brand-700: #46217a;
+  --brand-500: #6a2fb5;
+  --brand-300: #9b6fe0;
+  --gold:      #f5b820;
+  --gold-dark: #d99e0b;
+
+  /* Neutros */
+  --ink:       #1c1e26;
+  --muted:     #6b7280;
+  --line:      #e7e8ee;
+  --surface:   #ffffff;
+  --canvas:    #f4f5f9;
+
+  /* Estados */
+  --success:   #2e9e5b;
+  --danger:    #dc3545;
+  --warning:   #e0a800;
+  --info:      #2b7de9;
+
+  /* Tema por rol — valores por defecto (marca) */
+  --role-primary:      var(--brand-700);
+  --role-primary-dark: var(--brand-900);
+  --role-soft:         #efe9f8;
+  --role-text-on:      #ffffff;
+
+  /* Tipografía */
+  --font-display: "Saira Condensed", "Arial Narrow", sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Forma */
+  --radius: 14px;
+  --radius-sm: 9px;
+  --shadow-sm: 0 1px 2px rgba(28, 30, 38, 0.06), 0 1px 3px rgba(28, 30, 38, 0.05);
+  --shadow-md: 0 6px 18px rgba(28, 30, 38, 0.08);
+  --shadow-lg: 0 14px 40px rgba(28, 30, 38, 0.12);
+}
+
+/* ---- Temas por rol: definen el color que usan header, nav y botones ---- */
+.theme-user {
+  --role-primary:      #1e5fb4;
+  --role-primary-dark: #16447f;
+  --role-soft:         #e7f0fb;
+  --role-text-on:      #ffffff;
+}
+
+.theme-coach {
+  --role-primary:      #157f47;
+  --role-primary-dark: #0e5e34;
+  --role-soft:         #e3f4ea;
+  --role-text-on:      #ffffff;
+}
+
+.theme-admin {
+  --role-primary:      #6a2fb5;
+  --role-primary-dark: #46217a;
+  --role-soft:         #efe7fb;
+  --role-text-on:      #ffffff;
+}

@@ -1,0 +1,40 @@
+/* =====================================================================
+   index.css — Estilos base globales
+   ===================================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&display=swap");
+@import "./variables.css";
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--canvas);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .display {
+  font-family: var(--font-display);
+  letter-spacing: 0.2px;
+}
+
+a {
+  color: inherit;
+}
+
+/* Respeta a quienes prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
