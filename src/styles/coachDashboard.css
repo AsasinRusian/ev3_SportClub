@@ -1,0 +1,22 @@
+/* =====================================================================
+   coachDashboard.css — Identidad visual del Dashboard Coach (VERDE).
+   ===================================================================== */
+.welcome-banner.coach {
+  background:
+    radial-gradient(600px 220px at 100% 0%, rgba(255, 255, 255, 0.18), transparent 60%),
+    linear-gradient(135deg, #157f47 0%, #0e5e34 100%);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 1.6rem 1.7rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-md);
+}
+.welcome-banner h2 {
+  margin: 0 0 0.3rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.welcome-banner p {
+  margin: 0;
+  opacity: 0.9;
+}

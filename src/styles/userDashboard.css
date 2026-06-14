@@ -1,0 +1,22 @@
+/* =====================================================================
+   userDashboard.css — Identidad visual del Dashboard Usuario (AZUL).
+   ===================================================================== */
+.welcome-banner.user {
+  background:
+    radial-gradient(600px 220px at 100% 0%, rgba(255, 255, 255, 0.18), transparent 60%),
+    linear-gradient(135deg, #1e5fb4 0%, #16447f 100%);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 1.6rem 1.7rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-md);
+}
+.welcome-banner h2 {
+  margin: 0 0 0.3rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.welcome-banner p {
+  margin: 0;
+  opacity: 0.9;
+}
