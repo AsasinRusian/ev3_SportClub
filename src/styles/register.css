@@ -1,0 +1,190 @@
+/* =====================================================================
+   register.css — Formulario "Crear Cuenta" (tarjeta oscura centrada).
+   ===================================================================== */
+
+.register {
+  min-height: 100vh;
+  padding: 3rem 1.2rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background:
+    radial-gradient(900px 500px at 50% -10%, rgba(106, 47, 181, 0.35), transparent 60%),
+    radial-gradient(700px 500px at 100% 110%, rgba(245, 184, 32, 0.08), transparent 55%),
+    linear-gradient(160deg, #1a0d2e 0%, #120a20 55%, #0e0719 100%);
+}
+
+.register-card {
+  width: 100%;
+  max-width: 760px;
+  background: rgba(36, 19, 58, 0.72);
+  border: 1px solid rgba(245, 184, 32, 0.22);
+  border-radius: 18px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+  padding: 2.4rem 2.6rem 2.6rem;
+  backdrop-filter: blur(6px);
+}
+
+/* ---- Encabezado ---- */
+.register-head { text-align: center; margin-bottom: 1.8rem; }
+.register-head img { height: 46px; margin-bottom: 0.9rem; }
+.register-head h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 2rem;
+  color: #fff;
+  margin: 0 0 0.2rem;
+}
+.register-head p { color: rgba(255, 255, 255, 0.6); margin: 0; font-size: 0.92rem; }
+
+/* ---- Encabezado de sección ---- */
+.reg-section {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 1.8rem 0 1.1rem;
+}
+.reg-section span {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.reg-section::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ---- Rejilla de campos ---- */
+.reg-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.3rem;
+}
+.reg-grid .full { grid-column: 1 / -1; }
+
+.reg-field { display: flex; flex-direction: column; }
+
+.reg-field label {
+  color: #e7e2f3;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 0.45rem;
+}
+.reg-field label .req { color: var(--gold); margin-left: 2px; }
+
+.reg-field input,
+.reg-field select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  padding: 0.7rem 0.85rem;
+  color: #fff;
+  font-size: 0.95rem;
+  color-scheme: dark;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.reg-field input::placeholder { color: rgba(255, 255, 255, 0.4); }
+
+.reg-field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23bbb' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  padding-right: 2.2rem;
+}
+.reg-field select option { background: #1f1233; color: #fff; }
+
+.reg-field input:focus,
+.reg-field select:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(245, 184, 32, 0.16);
+}
+
+.reg-field.invalid input,
+.reg-field.invalid select {
+  border-color: #ff6b6b;
+}
+
+.reg-field .err {
+  color: #ff8d8d;
+  font-size: 0.78rem;
+  margin-top: 0.3rem;
+}
+
+/* ---- Términos ---- */
+.reg-terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin: 1.4rem 0 0.4rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+}
+.reg-terms input {
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+  accent-color: var(--gold);
+  flex-shrink: 0;
+}
+.reg-terms .err {
+  color: #ff8d8d;
+  font-size: 0.78rem;
+  display: block;
+  margin-top: 0.2rem;
+}
+
+/* ---- Alerta de error de API ---- */
+.reg-alert {
+  background: rgba(220, 53, 69, 0.15);
+  border: 1px solid rgba(220, 53, 69, 0.4);
+  color: #ffb3b3;
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* ---- Botón ---- */
+.reg-submit {
+  width: 100%;
+  background: var(--gold);
+  color: #1b1f27;
+  border: none;
+  font-weight: 800;
+  font-size: 1.02rem;
+  padding: 0.85rem;
+  border-radius: 10px;
+  margin-top: 1.4rem;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.reg-submit:hover:not(:disabled) { background: var(--gold-dark); transform: translateY(-1px); }
+.reg-submit:disabled { opacity: 0.7; cursor: default; }
+
+.reg-foot {
+  text-align: center;
+  margin-top: 1.2rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.9rem;
+}
+.reg-foot a { color: var(--gold); font-weight: 700; text-decoration: none; }
+.reg-foot a:hover { text-decoration: underline; }
+
+/* ---- Responsive ---- */
+@media (max-width: 620px) {
+  .register-card { padding: 1.8rem 1.4rem 2rem; }
+  .reg-grid { grid-template-columns: 1fr; }
+}
