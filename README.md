@@ -10,7 +10,7 @@ Proyecto de la **Unidad 3 — Programación Front End** (Evaluación N°3).
 
 ## Integrantes
 
-- _(Completa aquí tu nombre / los nombres del equipo)_
+- Kathalyna Ayleen Higuera Castro
 
 ---
 
