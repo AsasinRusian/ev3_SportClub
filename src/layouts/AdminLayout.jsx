@@ -6,6 +6,7 @@ function AdminLayout() {
   const links = [
     { to: "/admin/dashboard", label: "Inicio", end: true },
     { to: "/admin/usuarios", label: "Gestión de Usuarios" },
+    { to: "/admin/deportes", label: "Gestión de Deportes" },
     { to: "/admin/perfil", label: "Mi Perfil" },
   ];
 

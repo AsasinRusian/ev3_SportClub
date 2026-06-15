@@ -1,19 +1,6 @@
-/*
- * api.js — Cliente HTTP central.
- * Centraliza la URL del backend, agrega el token JWT a cada petición
- * y normaliza el manejo de errores.
- */
 import { mockRequest } from "./mockBackend.js";
 
-/* =====================================================================
-   INTERRUPTOR DE BACKEND
-   ---------------------------------------------------------------------
-   USE_MOCK = true   -> usa el backend SIMULADO (pruebas sin servidor).
-   USE_MOCK = false  -> usa el backend REAL en API_URL.
-
-   El dia de la evaluacion, pon USE_MOCK en false.
-   ===================================================================== */
-const USE_MOCK = true;
+const USE_MOCK = false;
 
 const API_URL = "http://localhost:3000/api";
 
@@ -22,7 +9,7 @@ function getToken() {
 }
 
 async function request(path, { method = "GET", body, auth = false } = {}) {
-  // Modo simulado: responde desde mockBackend.js
+
   if (USE_MOCK) {
     return mockRequest(path, { method, body });
   }
@@ -53,8 +40,12 @@ async function request(path, { method = "GET", body, auth = false } = {}) {
   }
 
   if (!response.ok) {
-    if (data?.errors?.length) {
-      throw new Error(data.errors.map((e) => e.message).join(" "));
+   
+    if (data?.errors) {
+      const list = Array.isArray(data.errors)
+        ? data.errors
+        : Object.values(data.errors);
+      if (list.length) throw new Error(list.join(" "));
     }
     throw new Error(data?.message || "Ocurrió un error inesperado.");
   }
@@ -66,6 +57,7 @@ export const api = {
   get: (path, auth = true) => request(path, { method: "GET", auth }),
   post: (path, body, auth = false) => request(path, { method: "POST", body, auth }),
   put: (path, body, auth = true) => request(path, { method: "PUT", body, auth }),
+  patch: (path, body, auth = true) => request(path, { method: "PATCH", body, auth }),
   del: (path, auth = true) => request(path, { method: "DELETE", auth }),
 };
 

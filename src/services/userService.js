@@ -1,7 +1,3 @@
-/*
- * userService.js — Llamadas al CRUD de usuarios (solo admin).
- * Todas las peticiones viajan con el token (auth = true por defecto).
- */
 import { api } from "./api.js";
 
 export async function getUsers() {

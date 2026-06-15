@@ -7,16 +7,7 @@ import {
   isFormValid,
 } from "../utils/validators";
 
-/*
- * Modal reutilizable para CREAR y EDITAR usuarios.
- *
- * props:
- *  - show:     boolean, controla visibilidad
- *  - mode:     "create" | "edit"
- *  - initial:  usuario a editar (o null en creación)
- *  - onClose:  cierra el modal
- *  - onSubmit: async (payload) => void  (lanza Error si el backend falla)
- */
+
 const EMPTY = { full_name: "", email: "", password: "", confirm: "", role: "user", active: true };
 
 function UserFormModal({ show, mode = "create", initial = null, onClose, onSubmit }) {
@@ -26,7 +17,6 @@ function UserFormModal({ show, mode = "create", initial = null, onClose, onSubmi
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
 
-  // Carga los datos del usuario al abrir en modo edición
   useEffect(() => {
     if (show) {
       setErrors({});
@@ -56,9 +46,9 @@ function UserFormModal({ show, mode = "create", initial = null, onClose, onSubmi
     const nextErrors = {
       full_name: validateFullName(form.full_name),
       email: validateEmail(form.email),
-      // En edición la contraseña es opcional (solo se valida si se escribió algo)
+
       password: passwordError,
-      // Confirmar solo si hay contraseña que validar
+
       confirm:
         (form.password || !isEdit) && form.confirm !== form.password
           ? "Las contraseñas no coinciden."

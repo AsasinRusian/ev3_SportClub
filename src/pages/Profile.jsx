@@ -16,9 +16,7 @@ function Profile() {
   const [savingProfile, setSavingProfile] = useState(false);
   const [pForm, setPForm] = useState({
     full_name: user?.full_name || "",
-    birthdate: user?.birthdate || "",
-    favorite_sport: user?.favorite_sport || "",
-    metadata: user?.metadata || "",
+    birth_date: user?.birth_date || "",
   });
   const [pErrors, setPErrors] = useState({});
 
@@ -27,12 +25,12 @@ function Profile() {
   const [pwErrors, setPwErrors] = useState({});
   const [savingPw, setSavingPw] = useState(false);
 
+  const registeredAt = user?.created_at || user?.createdAt;
+
   const startEdit = () => {
     setPForm({
       full_name: user?.full_name || "",
-      birthdate: user?.birthdate || "",
-      favorite_sport: user?.favorite_sport || "",
-      metadata: user?.metadata || "",
+      birth_date: user?.birth_date || "",
     });
     setPErrors({});
     setEditing(true);
@@ -53,11 +51,9 @@ function Profile() {
     try {
       const res = await updateProfile({
         full_name: pForm.full_name.trim(),
-        birthdate: pForm.birthdate,
-        favorite_sport: pForm.favorite_sport.trim(),
-        metadata: pForm.metadata.trim(),
+        birth_date: pForm.birth_date || null,
       });
-      if (res?.data?.user) setUser(res.data.user);
+      if (res?.user) setUser(res.user);
       setEditing(false);
       Swal.fire({ icon: "success", title: "Perfil actualizado correctamente", timer: 1400, showConfirmButton: false });
     } catch (error) {
@@ -88,6 +84,7 @@ function Profile() {
       await changePassword({
         current_password: pwForm.current_password,
         new_password: pwForm.new_password,
+        confirm_password: pwForm.confirm_password,
       });
       setPwForm({ current_password: "", new_password: "", confirm_password: "" });
       Swal.fire({ icon: "success", title: "Contraseña actualizada correctamente", timer: 1400, showConfirmButton: false });
@@ -103,7 +100,6 @@ function Profile() {
 
   return (
     <>
-      {/* Cabecera del módulo */}
       <div className="profile-top">
         <div className="page-head" style={{ marginBottom: 0 }}>
           <span className="eyebrow">Mi cuenta</span>
@@ -116,7 +112,7 @@ function Profile() {
       </div>
 
       <div className="profile-layout">
-        {/* ---- Resumen (izquierda) ---- */}
+        {/* ---- Resumen ---- */}
         <aside className="pcard summary-card">
           <div className="summary-avatar">{initialsOf(user?.full_name)}</div>
           <h2 className="summary-name">{capitalizeName(user?.full_name)}</h2>
@@ -136,7 +132,7 @@ function Profile() {
               <span className="si-icon">🎂</span>
               <div>
                 <div className="si-label">Fecha de nacimiento</div>
-                <div className="si-value">{user?.birthdate ? formatDate(user.birthdate) : "No registrada"}</div>
+                <div className="si-value">{user?.birth_date ? formatDate(user.birth_date) : "No registrada"}</div>
               </div>
             </div>
             <div className="summary-item">
@@ -152,13 +148,13 @@ function Profile() {
               <span className="si-icon">📅</span>
               <div>
                 <div className="si-label">Fecha de registro</div>
-                <div className="si-value">{user?.created_at ? formatDate(user.created_at) : "—"}</div>
+                <div className="si-value">{registeredAt ? formatDate(registeredAt) : "—"}</div>
               </div>
             </div>
           </div>
         </aside>
 
-        {/* ---- Formularios (derecha) ---- */}
+        {/* ---- Formularios ---- */}
         <div>
           {/* Datos personales */}
           <section className="pcard section-card">
@@ -191,34 +187,17 @@ function Profile() {
                   <label>Fecha de nacimiento</label>
                   <input
                     type="date"
-                    name="birthdate"
-                    value={editing ? pForm.birthdate : (user?.birthdate || "")}
+                    name="birth_date"
+                    value={editing ? (pForm.birth_date || "") : (user?.birth_date || "")}
                     onChange={handleProfileChange}
                     disabled={!editing}
                   />
                 </div>
 
                 <div className="pfield">
-                  <label>Deporte favorito</label>
-                  <input
-                    type="text"
-                    name="favorite_sport"
-                    placeholder="Ej: Fútbol"
-                    value={editing ? pForm.favorite_sport : (user?.favorite_sport || "")}
-                    onChange={handleProfileChange}
-                    disabled={!editing}
-                  />
-                </div>
-
-                <div className="pfield full">
-                  <label>Otros / Metadata <span style={{ color: "var(--muted)", fontWeight: 400 }}>(intereses, habilidades, etc.)</span></label>
-                  <textarea
-                    name="metadata"
-                    placeholder="Cuéntanos algo sobre ti..."
-                    value={editing ? pForm.metadata : (user?.metadata || "")}
-                    onChange={handleProfileChange}
-                    disabled={!editing}
-                  />
+                  <label>Rol</label>
+                  <input type="text" value={ROLE_LABELS[user?.role] || user?.role || ""} disabled />
+                  <span className="hint">El rol lo asigna el administrador.</span>
                 </div>
               </div>
 
@@ -233,7 +212,7 @@ function Profile() {
             </form>
           </section>
 
-          {/* Seguridad: cambio de contraseña */}
+          {/* Seguridad */}
           <section className="pcard section-card" style={{ marginBottom: 0 }}>
             <div className="sc-head">
               <h3>Cambiar Contraseña</h3>
@@ -279,9 +258,7 @@ function Profile() {
                 </div>
               </div>
 
-              <div className="info-note">
-                La contraseña debe tener al menos 8 caracteres.
-              </div>
+              <div className="info-note">La contraseña debe tener al menos 8 caracteres.</div>
 
               <div className="form-actions">
                 <button type="submit" className="btn-pass" disabled={savingPw}>
@@ -297,3 +274,4 @@ function Profile() {
 }
 
 export default Profile;
+

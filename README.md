@@ -10,7 +10,10 @@ Proyecto de la **Unidad 3 — Programación Front End** (Evaluación N°3).
 
 ## Integrantes
 
+
+
 - Kathalyna Ayleen Higuera Castro
+
 
 ---
 
@@ -61,29 +64,41 @@ Abre **http://localhost:5173** en el navegador.
 
 ## Cómo ejecutar el backend
 
-Este proyecto usa el **backend de la asignatura**. Debe estar corriendo antes de
-iniciar sesión. La URL del backend se configura en `src/services/api.js`:
+Este proyecto usa el **backend de la asignatura** (carpeta `Backend-SportClub-E3`).
+Debe estar corriendo antes de iniciar sesión.
+
+```bash
+cd Backend-SportClub-E3
+npm install
+npm run seed     # crea cuentas y deportes de demostración (si aplica)
+npm run dev      # o: npm start  -> API en http://localhost:3000
+```
+
+La URL del backend se configura en `src/services/api.js`:
 
 ```js
 const API_URL = "http://localhost:3000/api";
+const USE_MOCK = false; // false = backend real (evaluación)
 ```
 
-Ajusta esa constante si tu backend usa otro puerto o ruta base.
+Cuentas de prueba (contraseña `12345678` para todas):
 
-El frontend espera que el login y el registro respondan con el formato visto en clase:
+| Rol           | Correo          |
+|---------------|-----------------|
+| Administrador | admin1@demo.cl  |
+| Coach         | coach1@demo.cl  |
+| Usuario       | user1@demo.cl   |
 
-```json
-{
-  "ok": true,
-  "message": "Login exitoso.",
-  "data": {
-    "token": "jwt_generado_por_backend",
-    "user": { "id": 5, "full_name": "Demo Admin", "email": "admin@demo.cl", "role": "admin" }
-  }
-}
-```
+---
 
-Roles válidos: `user`, `coach`, `admin`.
+## Módulos del sistema
+
+- **Autenticación**: login y registro conectados al backend, sesión persistente, cierre de sesión con SweetAlert2.
+- **Rutas protegidas y roles**: `ProtectedRoute` y `RoleRoute` (acceso por rol).
+- **Dashboards diferenciados**: usuario (azul), coach (verde), administrador (morado).
+- **Gestión de Usuarios** (admin): CRUD con Modal React-Bootstrap, eliminación con SweetAlert2, actualización dinámica.
+- **Gestión de Deportes** (admin): listar, crear/editar (Modal React-Bootstrap), eliminar (SweetAlert2), cambiar estado con **Switch** (PATCH), botón **Refrescar** y actualización dinámica. Consume `/api/sport`.
+- **Mi Perfil**: ver y editar datos personales y cambiar contraseña.
 
 ---
 
@@ -117,14 +132,21 @@ largo mínimo de contraseña, coincidencia de contraseñas y feedback inmediato.
 
 ## Endpoints que consume el frontend
 
-| Método | Ruta                | Descripción              |
-|--------|---------------------|--------------------------|
-| POST   | /api/auth/register  | Registro de socios       |
-| POST   | /api/auth/login     | Inicio de sesión         |
-| GET    | /api/users          | Listar usuarios (admin)  |
-| POST   | /api/users          | Crear usuario (admin)    |
-| PUT    | /api/users/:id      | Editar usuario (admin)   |
-| DELETE | /api/users/:id      | Eliminar usuario (admin) |
+| Método | Ruta                     | Descripción                         |
+|--------|--------------------------|-------------------------------------|
+| POST   | /api/auth/login          | Inicio de sesión                    |
+| POST   | /api/auth/register       | Registro de socios                  |
+| PUT    | /api/auth/me             | Actualizar perfil propio            |
+| PUT    | /api/auth/me/password    | Cambiar contraseña propia           |
+| GET    | /api/users               | Listar usuarios (admin)             |
+| POST   | /api/users               | Crear usuario (admin)               |
+| PUT    | /api/users/:id           | Editar usuario (admin)              |
+| DELETE | /api/users/:id           | Eliminar usuario (admin)            |
+| GET    | /api/sport               | Listar deportes (admin)             |
+| POST   | /api/sport               | Crear deporte (admin)               |
+| PUT    | /api/sport/:id           | Editar deporte (admin)              |
+| DELETE | /api/sport/:id           | Eliminar deporte (admin)            |
+| PATCH  | /api/sport/:id/status    | Cambiar estado del deporte (Switch) |
 
-Si tu backend usa rutas distintas, ajústalas en `src/services/authService.js` y
-`src/services/userService.js`.
+Las rutas se configuran en `src/services/` (`authService.js`, `userService.js`,
+`sportService.js`).

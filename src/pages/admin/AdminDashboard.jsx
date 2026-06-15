@@ -70,6 +70,13 @@ function AdminDashboard() {
                 <div className="row-sub">Crear, editar y eliminar usuarios</div>
               </div>
             </Link>
+            <Link to="/admin/deportes" className="admin-shortcut">
+              <span className="sc-icon">🏅</span>
+              <div>
+                <div className="row-main">Gestión de Deportes</div>
+                <div className="row-sub">Administrar los deportes del club</div>
+              </div>
+            </Link>
             <Link to="/admin/perfil" className="admin-shortcut">
               <span className="sc-icon">⚙️</span>
               <div>

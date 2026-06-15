@@ -4,8 +4,6 @@ import Swal from "sweetalert2";
 
 import {
   registerUser,
-  saveSession,
-  dashboardPathForRole,
 } from "../services/authService";
 import {
   validateEmail,
@@ -69,31 +67,24 @@ function Register() {
 
     setLoading(true);
     try {
-      // Se envían los datos del registro al backend.
-      // Si el backend de la asignatura solo acepta full_name/email/password,
-      // ignorará los campos extra sin problema.
-      const data = await registerUser({
+      // El backend registra al usuario con rol "user".
+      // Enviamos los campos que el backend acepta; los extra los ignora.
+      await registerUser({
         full_name: form.full_name.trim(),
         email: form.email.trim(),
         password: form.password,
-        phone: form.phone.trim(),
-        birthdate: form.birthdate,
-        experience_level: form.experience_level,
-        document_type: form.document_type,
-        document_number: form.document_number.trim(),
+        birth_date: form.birthdate || undefined,
       });
-
-      saveSession(data.data.token, data.data.user);
 
       await Swal.fire({
         title: "¡Cuenta creada!",
-        text: "Tu registro se completó correctamente.",
+        text: "Tu registro se completó correctamente. Ahora inicia sesión.",
         icon: "success",
-        timer: 1400,
+        timer: 1600,
         showConfirmButton: false,
       });
 
-      navigate(dashboardPathForRole(data.data.user.role), { replace: true });
+      navigate("/login", { replace: true });
     } catch (error) {
       setApiError(error.message);
     } finally {
