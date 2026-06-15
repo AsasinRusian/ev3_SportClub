@@ -104,8 +104,9 @@ function Login() {
         </div>
 
         <div className="login-demo">
-          <strong>Cuentas de prueba:</strong><br />
-          admin@demo.cl / admin123 · coach@demo.cl / coach123 · usuario@demo.cl / usuario123
+          <strong>Cuentas de prueba (backend):</strong><br />
+          admin1@demo.cl · coach1@demo.cl · user1@demo.cl<br />
+          Contraseña para todas: 12345678
         </div>
       </form>
     </div>

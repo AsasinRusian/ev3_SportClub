@@ -4,16 +4,6 @@ import Swal from "sweetalert2";
 import { logout, getUser } from "../services/authService";
 import logo from "../assets/logo.png";
 
-/*
- * Cabecera común de los dashboards.
- * Incluye, según pide la pauta: Logo, "Mi Perfil" y "Cerrar Sesión".
- * Los enlaces de navegación se reciben por props (coherentes con el rol).
- *
- * props:
- *  - roleLabel: texto que acompaña al logo (ej. "Panel Usuario")
- *  - basePath:  prefijo de rutas del rol (ej. "/user")
- *  - links:     [{ to, label }] para la navegación
- */
 function DashboardHeader({ roleLabel, basePath, links = [] }) {
   const navigate = useNavigate();
   const user = getUser();

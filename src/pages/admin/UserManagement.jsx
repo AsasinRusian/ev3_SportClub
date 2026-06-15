@@ -149,7 +149,7 @@ function UserManagement() {
                         {ROLE_LABELS[u.role] || u.role}
                       </span>
                     </td>
-                    <td>{formatDate(u.created_at)}</td>
+                    <td>{formatDate(u.created_at || u.createdAt)}</td>
                     <td>
                       <div className="um-actions">
                         <button
