@@ -13,6 +13,19 @@ export function formatDate(value) {
   return `${day}/${month}/${year}`;
 }
 
+// Convierte una fecha al formato largo en español: "15 de Julio de 2026"
+export function formatDateLong(value) {
+  if (!value) return "—";
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return "—";
+  const meses = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre",
+  ];
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${day} de ${meses[d.getMonth()]} de ${d.getFullYear()}`;
+}
+
 // Capitaliza cada palabra de un nombre
 export function capitalizeName(name) {
   if (!name) return "";
