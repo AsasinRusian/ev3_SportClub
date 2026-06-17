@@ -14,6 +14,7 @@ import UserDashboard from "../pages/user/UserDashboard";
 import CoachDashboard from "../pages/coach/CoachDashboard";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import UserManagement from "../pages/admin/UserManagement";
+import SportManagement from "../pages/admin/SportManagement";
 
 import ProtectedRoute from "./ProtectedRoute";
 import RoleRoute from "./RoleRoute";
@@ -68,6 +69,7 @@ function AppRoutes() {
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="usuarios" element={<UserManagement />} />
+          <Route path="deportes" element={<SportManagement />} />
           <Route path="perfil" element={<Profile />} />
         </Route>
 
